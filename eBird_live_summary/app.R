@@ -13,11 +13,13 @@ library(janitor)
 source("token.R") # Get an eBird API token and assign it to object myebirdtoken
 source("functions.R")
 source("get_ebird_taxonomy.R")
+update_date <- file.info("app.R")$mtime %>% lubridate::as_date()
 
 # # local run
 # source("eBird_live_summary/token.R")
 # source("eBird_live_summary/functions.R")
 # ebd_tax <- read_csv("eBird_live_summary/eBirdTaxonomy.csv")
+# update_date <- file.info("eBird_live_summary/app.R")$mtime %>% lubridate::as_date()
 
 
 # Define UI for app ----
@@ -128,13 +130,13 @@ ui <- fluidPage(
           p("This tool is built to generate summaries of eBirding in a specific region for a specific date(s). It was created and is currently maintained for Bird Count India by Karthik Thrikkadeeri and Praveen J."),
           p("The code for this Shiny app can be found", 
             a("here", .noWS = "after",
-              href = "https://github.com/rikudoukarthik/corvid-fantasy/tree/main/eBird_live_summary"),
+              href = "https://github.com/birdcountindia/corvid-fantasy/tree/main/eBird_live_summary"),
             ". Please report any bugs or feature requests there."),
           p("Inspiration taken from", 
             a("birdsurveycrunch", href = "https://paintedstork.shinyapps.io/birdsurveycrunch/",
               .noWS = "after"),
-            "."),
-          p("Last update: ", lubridate::today())
+            ".",
+            "Last code update on ", update_date, ".")
         ),
         
       )
