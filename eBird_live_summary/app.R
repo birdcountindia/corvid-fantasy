@@ -15,7 +15,7 @@ source("functions.R")
 source("get_ebird_taxonomy.R")
 update_date <- file.info("app.R")$mtime %>% lubridate::as_date()
 
-# # local run (hash current section and unhash above when Publishing to shinyapps.io)
+# # local run
 # source("eBird_live_summary/token.R")
 # source("eBird_live_summary/functions.R")
 # ebd_tax <- read_csv("eBird_live_summary/eBirdTaxonomy.csv")

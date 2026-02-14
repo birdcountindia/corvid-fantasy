@@ -337,7 +337,6 @@ gen_part_summ <- function(regions, dates, list_spec = NULL) {
       
       # total species reported over all days
       tot_spec_alldays <- list_spec %>% 
-        filter(!is.na(ENGLISH.NAME) & ENGLISH.NAME != "") %>%   # <-- Added this line to fix one species for empty regions, due to NAs
         group_by(REGION) %>% 
         reframe(TOT.SPEC = n_distinct(ENGLISH.NAME))
       
@@ -366,10 +365,6 @@ gen_part_summ <- function(regions, dates, list_spec = NULL) {
     }
     
   }
-  
-  # Second fix where 0 checklists and 0 species were returning 1 species. Root cause not debugged
-  summary_part <- summary_part %>% mutate(across(starts_with("DAY"), ~ replace_na(., 0)),
-                                          ALL.DAYS = ifelse(is.na(ALL.DAYS) | ALL.DAYS == "NA", "0", ALL.DAYS))
   
   return(summary_part)
   
